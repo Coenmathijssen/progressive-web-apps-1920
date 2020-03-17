@@ -1,0 +1,26 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app",
+    "watch": "parcel watch ./index.html",
+    "devv": "parcel ./index.html",
+    "build": "parcel build ./index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.1",
+    "nodemon": "^2.0.2",
+    "parcel": "^1.12.4",
+    "parcel-plugin-ejs-template": "^0.1.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
