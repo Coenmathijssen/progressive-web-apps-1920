@@ -7,20 +7,28 @@ import Assign from './assign.js'
 import Router from './router.js'
 import Data from './data.js'
 
+const data = await API.fetchData()
+console.log('hi ', data)
+
+console.log('hi')
+
 // Starting initiziation
 init()
 
 function init () {
-  API.fetchData('beers').then(data => {
-    disableLoader()
-    console.log('We got dem data: ', data)
+  const dataTest = await API.fetchNew('beers')
+  console.log('werkt? ', dataTest)
 
-    // Assign data to overview
-    Assign.data(data)
+  // API.fetchData('beers').then(data => {
+  //   disableLoader()
+  //   console.log('We got dem data: ', data)
 
-    // Render detailpage on click with router
-    Router.renderDetailPage(data)
-  })
+  //   // Assign data to overview
+  //   Assign.data(data)
+
+  //   // Render detailpage on click with router
+  //   Router.renderDetailPage(data)
+  // })
 }
 
 // Toggle classes to let detailpage appear
