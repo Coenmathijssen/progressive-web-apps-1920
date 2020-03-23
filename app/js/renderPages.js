@@ -1,7 +1,5 @@
-// import API from './API.js'
-
-// const dataTest = await API.fetchNew('beers')
-// console.log('werkt? ', dataTest)
+// import { fetchNew } from './API.js'
+const fetchSec = require('./API.js')
 
 const fetch = require('node-fetch')
 
@@ -9,35 +7,29 @@ const fetch = require('node-fetch')
 const express = require('express')
 const router = express.Router()
 
-/*  All the urls that will be hit will render the right pages in this file. All the functions will first check if a session exists.
-If not, the user will be redirected to the login page. If the session does exist, the page of the given url will be rendered.
-The content needed to be rendered will be passed along in the res.render functions. */
-
 // Getting data from localStorage
 
 // Rendering homescreen
-router.get('/home', homePage)
+router.get('/overview', renderOverview)
 
-async function homePage(req, res) {
+async function renderOverview (req, res) {
   const data = await fetchNew('beers')
-  res.render('joe', {
+  res.render('overview', {
     data
   })
 }
 
+console.log(fetchSec('beers'))
+
 // console.log('joe ', data)
 
 async function fetchNew (endpoint) {
-  const apiUrl = 'https://sandbox-api.brewerydb.com/v2/'
-  const key = '73685041c0bfbe5aa327c0c735d3bb0c'
-
-  return fetch(`${apiUrl}${endpoint}/?key=${key}`)
+  return fetch(`${process.env.apiUrl}${endpoint}/?key=${process.env.key}`)
     .then(async response => {
       const data = await response.json()
       return data
     })
     .then(data => {
-      console.log(clean(data.data))
       return clean(data.data)
     })
     .catch(err => {
