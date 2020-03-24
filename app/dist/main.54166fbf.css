@@ -65,31 +65,23 @@ h2 {
 }
 
 .detail {
-  position: fixed;
-  height: 40vh;
-  padding-top: 60vh;
   top: 0;
   right: 0;
-  width: 0;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 10vh 0;
   background-color: #C0D6E4;
-  overflow-x: hidden;
-  overflow-y: scroll;
   z-index: 99;
   transition: all 0.7s ease-in-out;
 }
-.detail.visible {
-  width: 100vw;
-  left: 0;
-  transition: all 0.7s ease-in-out;
-}
-.detail > img:first-of-type {
+.detail a img:first-of-type {
   position: absolute;
   top: 30px;
   right: 30px;
   width: 50px;
   transition: all 0.3s ease-in-out;
 }
-.detail > img:first-of-type:hover {
+.detail a img:first-of-type:hover {
   transform: rotate(-90deg);
   transition: all 0.3s ease;
   cursor: pointer;
@@ -105,9 +97,10 @@ h2 {
 }
 .detail > div div:first-of-type {
   position: relative;
+  width: 50%;
 }
 .detail > div div:first-of-type img:first-of-type {
-  max-width: calc(250px + 80px);
+  width: 370px;
   padding: 0 40px;
 }
 .detail > div div:first-of-type img:nth-of-type(2) {
@@ -115,6 +108,9 @@ h2 {
   left: 35.5%;
   top: 50%;
   width: 130px;
+}
+.detail > div div:nth-of-type(2) {
+  width: 50%;
 }
 .detail > div div:nth-of-type(2) h2 {
   margin: 0;
@@ -151,7 +147,8 @@ body {
 
 body {
   font-family: Sans-Serif;
-  padding: 30px;
+  margin: 0;
+  padding: 0;
   background-color: #f6f6f6;
 }
 
@@ -244,29 +241,26 @@ a:hover {
   border-bottom: 1px solid #cccccc;
 }
 
-body > section:nth-of-type(2) {
+body.overview > section:first-of-type {
   position: relative;
   padding: 10vh 2em;
   margin: 2em;
   border-radius: 10px;
   box-shadow: inset 6px 6px 16px rgba(163, 177, 198, 0.6), inset 6px 6px 16px rgba(255, 255, 255, 0.5);
 }
-body > section:nth-of-type(2) h1 {
+body.overview > section:first-of-type h1 {
   margin: 0;
   text-align: center;
 }
-body > section:nth-of-type(2) img {
+body.overview > section:first-of-type img {
   width: 70px;
   position: absolute;
   bottom: 0;
 }
-body > section:nth-of-type(2) img:first-of-type {
-  left: 50px;
-}
-body > section:nth-of-type(2) img:nth-of-type(2) {
+body.overview > section:first-of-type img:nth-of-type(2) {
   left: 90px;
 }
-body > section:nth-of-type(2) img:nth-of-type(3) {
+body.overview > section:first-of-type img:nth-of-type(3) {
   right: 90px;
 }
 
@@ -275,7 +269,7 @@ body > section:nth-of-type(2) img:nth-of-type(3) {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.beer-list .beer {
+.beer-list a {
   width: calc(25% - 5em);
   margin: 1.5em 1em;
   padding: 1em;

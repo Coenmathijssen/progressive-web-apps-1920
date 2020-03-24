@@ -57,22 +57,18 @@
 
 // module.exports = { fetchData, fetchBreweries, fetchNew }
 
-export async function fetchNew (endpoint) {
-  const apiUrl = 'https://sandbox-api.brewerydb.com/v2/'
-  const key = '73685041c0bfbe5aa327c0c735d3bb0c'
-
-  return fetch(`${apiUrl}${endpoint}/?key=${key}`)
-    .then(async response => {
-      const data = await response.json()
-      return data
-    })
-    .then(data => {
-      console.log(clean(data.data))
-      return clean(data.data)
-    })
-    .catch(err => {
-      console.log('error:', err)
-    })
-}
+// export async function fetchNew (endpoint) {
+//   return fetch(`${process.env.apiUrl}${endpoint}/?key=${process.env.key}`)
+//     .then(async response => {
+//       const data = await response.json()
+//       return data
+//     })
+//     .then(data => {
+//       return clean(data.data)
+//     })
+//     .catch(err => {
+//       console.log('error:', err)
+//     })
+// }
 
 module.exports = { fetchNew }

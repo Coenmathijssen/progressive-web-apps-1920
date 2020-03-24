@@ -1,5 +1,5 @@
 // import { fetchNew } from './API.js'
-const fetchSec = require('./API.js')
+// const fetchNew = require('./API.js')
 
 const fetch = require('node-fetch')
 
@@ -10,19 +10,29 @@ const router = express.Router()
 // Getting data from localStorage
 
 // Rendering homescreen
-router.get('/overview', renderOverview)
+router
+  .get('/', renderOverview)
+  .get('/:id', renderDetailPage)
 
 async function renderOverview (req, res) {
+  console.log('running overview')
   const data = await fetchNew('beers')
   res.render('overview', {
     data
   })
 }
 
-console.log(fetchSec('beers'))
+async function renderDetailPage (req, res) {
+  console.log('running render')
+  const id = await req.params.id
+  const data = await fetchNew('beers')
+  const matchedItem = matchItem(data, id)
+  res.render('detailPage.ejs', {
+    data: matchedItem
+  })
+}
 
-// console.log('joe ', data)
-
+// Data fetch and clean
 async function fetchNew (endpoint) {
   return fetch(`${process.env.apiUrl}${endpoint}/?key=${process.env.key}`)
     .then(async response => {
@@ -67,6 +77,14 @@ function clean (data) {
       descLong: descLong
     }
   })
+}
+
+// Finding the corresponding data
+function matchItem (data, id) {
+  console.log(id)
+  const foundItem = data.filter(found => { return found.id === id })
+  console.log(foundItem[0])
+  return foundItem[0]
 }
 
 module.exports = router

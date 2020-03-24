@@ -20,4 +20,9 @@ app.use(express.static(path.join(__dirname, 'dist')))
 const renderPages = require('./js/renderPages.js')
 app.use(renderPages)
 
+// Importing files
+// const google = require('./js/google.js')
+// app.use(google)
+
 // app.get('/', (req, res) => res.send('Hello World!'))
+

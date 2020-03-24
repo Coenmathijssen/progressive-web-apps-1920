@@ -4,7 +4,7 @@
 @import 'detail';
 
 body {
-  background-color: $light-blue
+  background-color: $light-blue;
 }
 
 body {
@@ -103,7 +103,7 @@ a:hover {
   border-bottom: 1px solid #cccccc;
 }
 
-body > section:nth-of-type(2) {
+body.overview > section:first-of-type {
   position: relative;
   padding: 10vh 2em;
   margin: 2em;
@@ -139,12 +139,15 @@ body > section:nth-of-type(2) {
   flex-wrap: wrap;
   justify-content: space-between;
 
-  .beer {
+  a {
     width: calc(25% - 5em);
     margin: 1.5em 1em;
     padding: 1em;
     background-color: #edf1f5;
     border-radius: 10px;
+  }
+
+  .beer {
     // box-shadow: 3px 3px 16px rgba(163,177,198,0.6), -3px -3px 16px rgba(255,255,255, 0.5);
 
     img {

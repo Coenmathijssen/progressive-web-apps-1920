@@ -7,7 +7,7 @@
     "start": "node app.js",
     "dev": "nodemon app",
     "watch": "parcel watch ./joe.html",
-    "devv": "parcel ./index.html",
+    "devv": "parcel ./joe.html",
     "build": "parcel build ./joe.html"
   },
   "author": "",
