@@ -30,9 +30,11 @@ This subject is all about converting your client-side rendered webapp to a serve
 6. To develop and see changes live, use this in your first window of your terminal:
 <br></br>
 `npm run watch`
+<br></br>
 And this in your second window of your terminal:
 <br></br>
 `npm run dev`
+<br></br>
 These commands are editable in the package.json file
 <br></br>
 6. Open the localhost to view the webapp.
