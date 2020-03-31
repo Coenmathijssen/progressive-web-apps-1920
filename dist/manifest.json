@@ -1,0 +1,18 @@
+{
+  "name": "Beer Fetcher",
+  "short_name": "Save and rate your favorite beers",
+  "theme_color": "#101010",
+  "background_color": "#101010",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [{
+        "src":"beer-icon.5e39d1f7.png",
+        "type":"image/png",
+        "sizes":"512x512"
+    },{
+        "src": "beer-icon-64x64.c350da9a.png",
+        "type": "image/png",
+        "sizes": "64x64"
+    }]
+}
