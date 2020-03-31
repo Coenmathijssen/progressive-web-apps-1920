@@ -221,3 +221,5 @@ All these implementations resulted in the following Audit scores:
 <img width="1093" alt="Screenshot 2020-03-31 at 13 02 19" src="https://user-images.githubusercontent.com/43337909/78031515-f229be80-7363-11ea-99e8-c09ce48ab26d.png">
 <img width="725" alt="Screenshot 2020-03-31 at 15 25 38" src="https://user-images.githubusercontent.com/43337909/78031523-f48c1880-7363-11ea-9fe0-3f8114c96ce5.png">
 <img width="730" alt="Screenshot 2020-03-31 at 15 25 46" src="https://user-images.githubusercontent.com/43337909/78031533-f6ee7280-7363-11ea-8256-04093fac6972.png">
+
+I couldn't fix the link issue, because I have links around the articles to redirect to a generated page with the corresponding data. However, these links can't have a name. On top of that, I didn't have time to implement a HTTP2 method.
