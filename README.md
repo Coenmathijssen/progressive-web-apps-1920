@@ -73,6 +73,6 @@ app.use(express.static(path.join(__dirname, 'dist')))
 const renderPages = require('./js/renderPages.js')
 app.use(renderPages)
 ```
-
+<br></br>
 Next I needed to rewrite my HTML to EJS. So I splitted up my page into as many modules as I could find:
 - 
