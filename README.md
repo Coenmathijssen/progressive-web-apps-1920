@@ -1,4 +1,5 @@
 # Progressive Web Apps - CMDA minor web
+<img width="1280" alt="Screenshot 2020-03-31 at 16 02 32" src="https://user-images.githubusercontent.com/43337909/78035230-1a67ec00-7369-11ea-8ddf-0d0693fac369.png">
 ## What is this subject about?
 This subject is all about converting your client-side rendered webapp to a server-side rendered webapp. By rendering as much as possible on the server, you're not dependent on browser and device compatibality. If Javascript is turned off, it will still render. On top of that, it will speed up the webapp and make it consistent on all devices.
 
