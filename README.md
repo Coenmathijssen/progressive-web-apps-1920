@@ -187,4 +187,37 @@ self.addEventListener('fetch', event => {
 
 ### You understand the critical rendering path and how you can optimize it to improve your webapp.
 With the tutorial of Declan, I now understand how you can view your critical rendering path and implement improvements. I found that setting your network on 3g and check your network waterfall and snapshots, in combination with the Google Audit tool, will give you a good insight where improvements could be made. My first score was:
+<img width="1187" alt="Screenshot 2020-03-31 at 10 12 42" src="https://user-images.githubusercontent.com/43337909/78030327-32883d00-7362-11ea-9f5b-7e0ad7cc24eb.png">
 
+#### How I improved this score:
+- I minified my CSS and JavaScript with the help of the Parcel Bundler. Which got my **Javascript file to 170kb (first was 359kb)** and my **CSS file to from 6kb (first was 8kb)**
+- I compressed all my images (svg, png and jpg). Again with the parcel bundler. 
+- I gave all my images alt tags.
+- I fixed some console.log errors. 
+- I implemented browser caching. I used memory-cache for this. I followed the following [tutorial from medium](https://medium.com/the-node-js-collection/simple-server-side-cache-for-express-js-with-node-js-45ff296ca0f0). This resulted in writing this cache function, running on every router.get:
+```javascript
+// Caching setup
+const mcache = require('memory-cache')
+
+let cache = (duration) => {
+  return (req, res, next) => {
+    let key = '__express__' + req.originalUrl || req.url
+    let cachedBody = mcache.get(key)
+    if (cachedBody) {
+      res.send(cachedBody)
+      return
+    } else {
+      res.sendResponse = res.send
+      res.send = (body) => {
+        mcache.put(key, body, duration * 1000)
+        res.sendResponse(body)
+      }
+      next()
+    }
+  }
+```
+
+All these implementations resulted in the following Audit scores:
+<img width="1093" alt="Screenshot 2020-03-31 at 13 02 19" src="https://user-images.githubusercontent.com/43337909/78031515-f229be80-7363-11ea-99e8-c09ce48ab26d.png">
+<img width="725" alt="Screenshot 2020-03-31 at 15 25 38" src="https://user-images.githubusercontent.com/43337909/78031523-f48c1880-7363-11ea-9fe0-3f8114c96ce5.png">
+<img width="730" alt="Screenshot 2020-03-31 at 15 25 46" src="https://user-images.githubusercontent.com/43337909/78031533-f6ee7280-7363-11ea-8256-04093fac6972.png">
