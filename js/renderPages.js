@@ -54,12 +54,14 @@ async function renderDetailPage (req, res) {
 
 // Data fetch and clean
 async function fetchNew (endpoint) {
+  console.log('fetching')
   return fetch(`${process.env.apiUrl}${endpoint}/?key=${process.env.key}`)
     .then(async response => {
       const data = await response.json()
       return data
     })
     .then(data => {
+      console.log('worked')
       return clean(data.data)
     })
     .catch(err => {
