@@ -17,7 +17,7 @@ This subject is all about converting your client-side rendered webapp to a serve
 2. Create a directory in a location of your choice with `mkdir` in your console.
 3. Clone the repository with the following command:
 <br></br>
-`https://github.com/Coenmathijssen/web-app-from-scratch-1920.git`
+`https://github.com/Coenmathijssen/progressive-web-apps-1920.git`
 <br></br>
 4. Navigate to the repo with the `cd` command in your console. Next, install all the dependencies with 
 <br></br>
@@ -27,23 +27,21 @@ This subject is all about converting your client-side rendered webapp to a serve
 <br></br>
 `npm run build`
 <br></br>
-6. To develop and see changes live, use:
+6. To develop and see changes live, use this in your first window of your terminal:
+<br></br>
+`npm run watch`
+And this in your second window of your terminal:
 <br></br>
 `npm run dev`
-These command are editable in the package.json file
+These commands are editable in the package.json file
 <br></br>
 6. Open the localhost to view the webapp.
 
 ## Deployment
-Deploy website on GitHub pages.
-1. Create a repository and paste the bundle.js, html and css files.
-2. Go to the settings tab in your repository.
-3. Scroll to Github Pages and activate.
-
-Deploy website on Netlify.
-1. Ga to https://www.netlify.com/ en sign in (or create an account).
-2. Click on the button 'new site from git'.
-3. Connect the Git repo to your Netlify.
+Deploy website on Heroku:
+1. Go to https://www.heroku.com/ and sign in (or create an account).
+2. Create new app.
+3. Connect the Git repo to your Heroku.
 4. Change the directory to 'dist'.
-5. Press 'deploy site'.
+5. Run the installation commands in your terminal.
 
