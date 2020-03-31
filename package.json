@@ -18,8 +18,7 @@
     "ejs": "^3.0.1",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2",
-    "parcel": "^1.12.4",
-    "parcel-plugin-ejs-template": "^0.1.2"
+    "parcel": "^1.12.4"
   },
   "dependencies": {
     "express": "^4.17.1",
