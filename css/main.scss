@@ -7,6 +7,14 @@ body {
   background-color: $light-blue;
 }
 
+body.offline {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   font-family: Sans-Serif;
   padding: 30px;

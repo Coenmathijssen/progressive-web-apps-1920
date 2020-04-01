@@ -31,10 +31,12 @@ let cache = (duration) => {
 // Rendering homescreen
 router
   .get('/', cache(10), renderOverview)
+  .get('/offline', (req, res) => {
+    res.render('offline')
+  })
   .get('/:id', cache(10), renderDetailPage)
 
 async function renderOverview (req, res) {
-  console.log('running overview')
   const data = await fetchNew('beers')
   res.render('overview', {
     data
@@ -42,7 +44,6 @@ async function renderOverview (req, res) {
 }
 
 async function renderDetailPage (req, res) {
-  console.log('running render')
   const id = await req.params.id
   console.log('ID: ', id)
   const data = await fetchNew('beers')
