@@ -30,11 +30,11 @@ let cache = (duration) => {
 
 // Rendering homescreen
 router
+  .get('/', cache(10), renderOverview)
   .get('/offline', (req, res) => {
     res.render('offline')
   })
   .get('/:id', cache(10), renderDetailPage)
-  .get('/', cache(10), renderOverview)
 
 async function renderOverview (req, res) {
   const data = await fetchNew('beers')
