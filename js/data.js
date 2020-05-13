@@ -1,24 +1,25 @@
-// Sort data functions
-function sort (data) {
-  return data.sort((a, b) => a.name.localeCompare(b.name))
-}
+const fetch = require('node-fetch')
 
-function sortReverse (data) {
-  return data.sort((a, b) => b.name.localeCompare(a.name))
-}
-
-function search (data) {
-  const input = document.getElementById('search')
-  let filteredData = data.filter(beer => {
-    return beer.name.indexOf(input.value) > -1
-  })
-  return filteredData
+// Data fetch and clean
+async function fetchBeers (endpoint) {
+  console.log('fetch')
+  return fetch(`${process.env.apiUrl}${endpoint}/?key=${process.env.key}`)
+    .then(async response => {
+      const data = await response.json()
+      return data
+    })
+    .then(data => {
+      return clean(data.data)
+    })
+    .catch(err => {
+      console.log('error:', err)
+    })
 }
 
 function clean (data) {
   return data.map(beer => {
     let image
-    beer.labels ? image = beer.labels.large : image = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png'
+    beer.labels ? image = beer.labels.large : image = './no-image.2f1a8e61.png'
 
     let abv
     beer.abv === undefined ? abv = 'alc. -%' : abv = 'alc. ' + beer.abv + '%'
@@ -47,4 +48,10 @@ function clean (data) {
   })
 }
 
-module.exports = { sort, sortReverse, search, clean }
+// Finding the corresponding data
+function matchItem (data, id) {
+  const foundItem = data.filter(found => { return found.id === id })
+  return foundItem[0]
+}
+
+module.exports = { fetchBeers, matchItem }
