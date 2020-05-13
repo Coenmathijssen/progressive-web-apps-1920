@@ -65,6 +65,90 @@ Deploy website on Heroku:
 4. Change the directory to 'dist'.
 5. Run the installation commands in your terminal.
 
+## Data 
+
+When fetching the data, you get an enormous amount of information per beer. I don't need alot of it, so I wrote a function to clean up the data and only use the neccesary parts:
+
+### Raw data
+
+```javscript
+{ id: 'aG4Ie2',
+       name: 'Alpha Dog Imperial IPA',
+       nameDisplay: 'Alpha Dog Imperial IPA',
+       description:
+        'A True Hop Bomb Brewed plenty of Columbus and Mt Hood Hops for a Piney hop character. Premium Pale, Honey and Munich Malt make this beer a little less malty but packing plenty of hop punch.',
+       abv: '8.5',
+       ibu: '127',
+       srmId: 6,
+       availableId: 1,
+       styleId: 31,
+       isOrganic: 'N',
+       isRetired: 'N',
+       labels: [Object],
+       status: 'verified',
+       statusDisplay: 'Verified',
+       createDate: '2013-05-02 18:24:18',
+       updateDate: '2018-11-02 02:15:14',
+       srm: [Object],
+       available: [Object],
+       style: [Object] } ],
+  status: 'success' }
+```
+
+### Cleaning data function
+
+```javascript
+function clean (data) {
+  return data.map(beer => {
+    let image
+    beer.labels ? image = beer.labels.large : image = './no-image.2f1a8e61.png'
+
+    let abv
+    beer.abv === undefined ? abv = 'alc. -%' : abv = 'alc. ' + beer.abv + '%'
+
+    let type
+    beer.style ? type = beer.style.shortName : type = 'No name available'
+
+    let descShort
+    beer.style === undefined ? descShort = 'No description available' : descShort = beer.style.description.match(/\b[\w']+(?:[^\w\n]+[\w']+){0,30}\b/g)[0] + '...'
+
+    let descLong
+    beer.style === undefined ? descLong = 'No description available' : descLong = beer.style.description
+
+    return {
+      id: beer.id,
+      name: beer.name,
+      abv: abv,
+      isOrganic: beer.isOrganic,
+      isRetired: beer.isRetired,
+      image: image,
+      date: beer.createDate.slice(0, -9),
+      type: type,
+      descShort: descShort,
+      descLong: descLong
+    }
+  })
+}
+```
+
+### Cleanded data
+
+```javascript
+{ id: 'aG4Ie2',
+    name: 'Alpha Dog Imperial IPA',
+    abv: 'alc. 8.5%',
+    isOrganic: 'N',
+    isRetired: 'N',
+    image:
+     'https://brewerydb-images.s3.amazonaws.com/beer/aG4Ie2/upload_yX4wkY-large.png',
+    date: '2013-05-02',
+    type: 'Imperial IPA',
+    descShort:
+     'Imperial or Double India Pale Ales have intense hop bitterness, flavor and aroma. Alcohol content is medium-high to high and notably evident. They range from deep golden to medium copper...',
+    descLong:
+     'Imperial or Double India Pale Ales have intense hop bitterness, flavor and aroma. Alcohol content is medium-high to high and notably evident. They range from deep golden to medium copper in color. The style may use any variety of hops. Though the hop character is intense it\'s balanced with complex alcohol flavors, moderate to high fruity esters and medium to high malt character. Hop character should be fresh and lively and should not be harsh in quality. The use of large amounts of hops may cause a degree of appropriate hop haze. Imperial or Double India Pale Ales have medium-high to full body. Diacetyl should not be perceived. The intention of this style of beer is to exhibit the fresh and bright character of hops. Oxidative character and aged character should not be present.' }
+```
+
 ## Learning goals and how I achieved them
 ### You know the difference between client- and server-side rendering. You are able to apply SSR to display data from an API
 #### Installing and setting up Express & EJS
