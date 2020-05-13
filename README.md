@@ -1,7 +1,17 @@
 # Progressive Web Apps - CMDA minor web
 <img width="1280" alt="Screenshot 2020-03-31 at 16 02 32" src="https://user-images.githubusercontent.com/43337909/78035230-1a67ec00-7369-11ea-8ddf-0d0693fac369.png">
+
 ## What is this subject about?
-This subject is all about converting your client-side rendered webapp to a server-side rendered webapp. By rendering as much as possible on the server, you're not dependent on browser and device compatibality. If Javascript is turned off, it will still render. On top of that, it will speed up the webapp and make it consistent on all devices.
+This subject is all about converting your client-side rendered webapp to a server-side rendered webapp. By rendering as much as possible on the server, you're not dependent on browser and device compatibality. If Javascript is turned off, it will still render. On top of that, I will use progressive web app enhancements to increase loading speed, offline use, usability, installabiltiy and make it look and feel like a real app.
+
+## Features 
+- Server-side rendering
+- Offline 
+- Static and dynamic caching with Service Worker
+- Browser caching
+- Gzip compression
+- Minification of CSS and JS
+- Critical rendering path optimalisation
 
 ## NPM (dev)dependencies
 - [Express](https://expressjs.com/)
@@ -10,8 +20,8 @@ This subject is all about converting your client-side rendered webapp to a serve
 - [Node-fetch](https://www.npmjs.com/package/node-fetch)
 - [Nodemon](https://www.npmjs.com/package/node-fetch)
 - [Dotenv](https://www.npmjs.com/package/dotenv)
-- [Memory-cache](https://www.npmjs.com/package/memory-cache)
-- [Node-fetch](https://www.npmjs.com/package/node-fetch)
+- [Node-sass](https://www.npmjs.com/package/node-sass)
+- [compression](https://www.npmjs.com/package/compression)
 
 ## Install
 1. Open the terminal on your computer.
@@ -51,7 +61,8 @@ Deploy website on Heroku:
 ## Learning goals and how I achieved them
 ### You know the difference between client- and server-side rendering. You are able to apply SSR to display data from an API
 #### Installing and setting up Express & EJS
-First I needed to setup a server to enable SSR. I chose Express for this task. It's easy to setup and I've already tried it before. I installed it via NPM and created a app.js with the basic server setup:
+First I needed to setup a server to enable SSR. I chose Express for this task. It's easy to setup and I've already tried it before. I installed it via NPM and created an app.js with the basic server setup:
+
 ```javascript
 require('dotenv').config()
 const express = require('express')
@@ -74,16 +85,22 @@ app.use(express.static(path.join(__dirname, 'dist')))
 const renderPages = require('./js/renderPages.js')
 app.use(renderPages)
 ```
-Next Next I needed to rewrite my HTML to EJS. So I splitted up my page into as many modules as I could find. These modules are:
+Next Next I needed to rewrite my HTML to EJS. So I splitted up my page into as many modules as I could find. 
+
+**EJS Modules**
 - Head. With all the required script and meta tags, so I don't have to repeat myself.
-- Dropdown. The dropdown menu is a seperate segment.
 - Search. The search section is also an indivual piece.
-- Article. Every data object from the API will be put in an article. These articles together define my webapp.
-- Footer.
+- Article. Every data object from the API will be put in an article. These articles together define my webapp overview.
+- Footer. For script tags and credits
+
+**EJS pages**
+- Overview page. An introduction together with a collection of all the article modules
+- Detail page. Detailed information about the clicked beer.
 
 I seperated all these parts and wrote them in EJS. I could easily inject the data through EJS now, because it's server-side rendered.
 
 Next I need to create a page to render the corresponding pages when a route is hit. I did so in my renderPages.js file:
+
 ```javascript
 router
   .get('/', cache(10), renderOverview)
@@ -134,7 +151,7 @@ async function fetchNew (endpoint) {
 First my 'detail page' was actually inside my index.html. It was positioned absolute and the content was changed when clicked on an article. Now that it is SSR, I wanted to generate a different page (with the unique id) and generate the corresponding data with EJS. So I did.
 
 ### You understand how a Service Worker is used and are able to implement it in your webapp.
-When Declan first spoke about the Service worker, if thought two things: Wow this is really awesome and this is a very difficult subject to grasp completely. I understood what it did, but I got really confused by the syntax. Following his explanation, I went to Google to get a better understanding. And what would be a better explanation, then from Google itself. 
+When Declan first spoke about the Service worker, I thought two things: 1. Wow this is really awesome. 2. This is a very difficult subject to grasp completely. I understood what it did, but I got really confused by the syntax. Following his explanation, I went to Google to get a better understanding. And what would be a better explanation, then from Google itself. 
 
 A Service Worker is a Javascript worker which can't access the DOM directly. However, it functions as a middle man between the client and the server/db. By being so, it allows you to control how network requests from your page are handled. Say you are requesting a css file which hasn't been changed. The Service Worker can serve it directly to you, because it has saved that version before. When the file does change, it will let you get the file from the server. Then the service worker will save the file again, so it can serve it to you faster (if it isn't changed). Very cool stuff!
 
