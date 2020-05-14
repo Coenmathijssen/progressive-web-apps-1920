@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use(compression())
 
 // Use caching
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control
 app.use((req, res, next) => {
   // Keep cache one week
   res.header('Cache-Control', 'max-age=604800')
